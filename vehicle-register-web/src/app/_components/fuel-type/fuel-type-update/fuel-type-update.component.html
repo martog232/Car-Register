@@ -1,0 +1,29 @@
+<form class="container"> 
+    <div *ngIf="router.url === '/fuel-types/add'"> 
+      <h2>{{'add-fuel-type.title'|translate}}</h2>
+      <div class="form-group" >
+        <label for="formGroupExampleInput">{{'name' | translate}} :  {{emptyFuelType.name}}</label>
+        <input type="text" [(ngModel)]="emptyFuelType.name" name="name" class="form-control" id="name" required maxlength="10">
+      </div>
+      <div class="form-group" >
+        <label for="formGroupExampleInput2">{{'code' | translate}} :  {{emptyFuelType.code}}</label>
+        <input type="text" [(ngModel)]="emptyFuelType.code" name="name" class="form-control" id="name" required maxlength="2">
+      </div>
+      <button type="button" class="btn btn-outline-primary" (click)="onAddFuelType()" >{{'add' | translate}}</button>
+      <button class="btn btn-outline-danger" routerLink="/fuel-types" >{{ 'cancel' | translate }}</button>
+  </div>
+  <div *ngIf="!(router.url === '/fuel-types/add')"> 
+    <h2>{{'update-fuel-type.title'|translate}}</h2>
+    <div class="form-group" >
+      <label for="formGroupExampleInput">{{'name' | translate}} :</label>
+      <input type="text" [(ngModel)]="emptyFuelType.name" name="name" class="form-control" id="name" required maxlength="10">
+    </div>
+    <div class="form-group" >
+      <label for="formGroupExampleInput2">{{'code' | translate}}</label>
+      <input type="text" [(ngModel)]="emptyFuelType.code" name="code" class="form-control" id="code" required maxlength="2">
+    </div>
+    <button type="button" class="btn btn-outline-primary" (click)="onUpdateFuelType()">{{'update' | translate}}</button>
+    <button class="btn btn-outline-danger" routerLink="/Fuel-types" >{{'cancel'|translate}}}</button>
+  </div>
+   </form>
+  

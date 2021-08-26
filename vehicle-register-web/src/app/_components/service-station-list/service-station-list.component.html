@@ -1,0 +1,91 @@
+<div class="container">
+    <h2 id="list-title"><b>{{'ServiceStations' | translate}}</b></h2>
+    <div class="input-group col-md-12 mb-3">
+      <input placeholder="{{'name' | translate}}" [(ngModel)]="serviceStationFilter.name" id="searchByName" name="searchByName"
+        class="form-control mr-2">
+      <input placeholder="{{'address' | translate}}" [(ngModel)]="serviceStationFilter.addressAddress" id="searchByCode"
+        name="searchByCode" class="form-control ml-2 mr-2">
+        <input placeholder="{{'startWorkTime' | translate}}" [(ngModel)]="serviceStationFilter.startWorkTime" id="searchByStartWorkTime"
+         name="searchByStartWorkTime" class="form-control mr-2">
+         <input placeholder="{{'offWorkTime' | translate}}" [(ngModel)]="serviceStationFilter.offWorkTime" id="searchByOffWorkTime"
+         name="searchByOffWorkTime" class="form-control mr-2">
+      <label for="deleted" class="form-group ml-4 mr-2 mb-1">{{'ValidInvalid' | translate}}</label>
+      <select class="form-control" name="deleted" id="deleted" [(ngModel)]=serviceStationFilter.isValid>
+        <option value="">{{'all' | translate}}</option>
+        <option value="true">{{'valid' | translate}}</option>
+        <option value="false">{{'invalid' | translate}}</option>
+      </select>
+      <span>
+        <button id="btn-search" (click)="onSearch(serviceStationFilter)" class="btn btn-primary ml-2" type="button">{{'Search' |
+          translate}}</button>
+      </span>
+    </div>
+    <br>
+    <div class="input-group col-md-12 mb-3">
+      <label for="sortBy" class="form-group mr-2">{{'SortBy' | translate}}</label>
+      <select class="form-control" name="sortBy" id="sortBy" [(ngModel)]=serviceStationFilter.sortBy>
+        <option value="id">{{'id' | translate}}</option>
+        <option value="name">{{'name' | translate}}</option>
+        <option value="address">{{'address' | translate}}</option>
+      </select>
+      <label for="sortDirection" class="form-group ml-4 mr-2">{{'SortDirection' | translate}}</label>
+      <select class="form-control" name="sortDirection" id="sortDirection" [(ngModel)]=serviceStationFilter.sortDirection>
+        <option value="asc">{{'asc' | translate}}</option>
+        <option value="desc">{{'desc' | translate}}</option>
+      </select>
+      <div>
+        <button (click)="onChangeSort(serviceStationFilter)" class="btn btn-primary ml-2" id="btn-sort" type="button">{{'Sort' |
+          translate}}</button>
+      </div>
+    </div>
+    <br>
+    <div class="input-group form-inline col-md-12 mb-3" id="paging-div-1">
+      <div class="form-group col-md-9" id="paging-div-2">
+        <div class="form-group">
+          <label for="itmsPerPage" class="form-group mr-2">{{'ItemsPerPage' | translate}}</label>
+          <select class="form-control mr-4" id="itmsPerPage" name="itemsPerPage" [(ngModel)]=serviceStationFilter.size
+            (ngModelChange)="onChange(serviceStationFilter.size)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+        </div>
+        <ngb-pagination [collectionSize]="totalElements" [pageSize]="serviceStationFilter.size" [(page)]="serviceStationFilter.page"
+          [maxSize]="10" (pageChange)="onPageChange($event)"></ngb-pagination>
+      </div>
+      <div id="button-div">
+        <a class="btn btn-outline-primary" routerLink="/service-stations/add">{{'AddNewServiceStation' | translate}}</a>
+      </div>
+    </div>
+    <br>
+    <h3 *ngIf="totalElements == 0"><b>{{'NoServiceStations' | translate}}</b></h3>
+    <table class="table table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th class="col-md-1" scope="col">{{'id' | translate}}</th>
+          <th class="col-md-2" scope="col">{{'name' | translate}}</th>
+          <th class="col-md-2" scope="col">{{'address' | translate}}</th>
+          <th class="col-md-2" scope="col">WorkTime</th>
+          <th class="col-md-2" scope="col">{{'ValidInvalid' | translate}}</th>
+          <th class="col-md-2" scope="col">{{'Edit' | translate}}</th>
+          <th class="col-md-3" scope="col">{{'SetValidInvalid' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table table-hover" *ngFor="let serviceStation of serviceStations">
+          <td>{{ serviceStation.id }}</td>
+          <th>{{ serviceStation.name }}</th>
+          <td>{{ serviceStation.address.address }}</td>
+          <td>{{serviceStation.startWorkTime}}/{{serviceStation.offWorkTime}}</td>
+          <td *ngIf="serviceStation.isValid">{{'Valid' | translate}}</td>
+          <td *ngIf="!serviceStation.isValid">{{'Invalid' | translate}}</td>
+          <td><a class="btn btn-outline-dark" routerLink="/service-stations/update/{{ serviceStation.id }}">{{'Edit' | translate}}</a></td>
+          <td *ngIf="serviceStation.isValid"><button type="button" id="isValid" name="isValid" class="btn btn-outline-danger"
+              (click)="changeIsValid(serviceStation.id, serviceStationFilter)">{{'SetInvalid' | translate}}</button></td>
+          <td *ngIf="!serviceStation.isValid"><button type="button" id="isNotValid" name="isNotValid"
+              class="btn btn-outline-success" (click)="changeIsValid(serviceStation.id, serviceStationFilter)">{{'SetValid' |
+              translate}}</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

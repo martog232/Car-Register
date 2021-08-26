@@ -1,0 +1,90 @@
+<div class="container">
+    <h2 id="list-title"><b>{{'ServiceTypes' | translate}}</b></h2>
+    <div class="input-group col-md-12 mb-3">
+      <input placeholder="{{'name' | translate}}" [(ngModel)]="serviceTypeFilter.name" id="searchByName" name="searchByName"
+        class="form-control mr-2">
+      <input placeholder="{{'description' | translate}}" [(ngModel)]="serviceTypeFilter.description" id="description"
+        name="description" class="form-control ml-2 mr-2">
+        <input placeholder="{{'code' | translate}}" [(ngModel)]="serviceTypeFilter.code" id="searchByCode"
+        name="searchByCode" class="form-control ml-2 mr-2">
+      <label for="deleted" class="form-group ml-4 mr-2 mb-1">{{'ValidInvalid' | translate}}</label>
+      <select class="form-control" name="deleted" id="deleted" [(ngModel)]=serviceTypeFilter.isValid>
+        <option value="">{{'all' | translate}}</option>
+        <option value="true">{{'valid' | translate}}</option>
+        <option value="false">{{'invalid' | translate}}</option>
+      </select>
+      <span>
+        <button id="btn-search" (click)="onSearch(serviceTypeFilter)" class="btn btn-primary ml-2" type="button">{{'Search' |
+          translate}}</button>
+      </span>
+    </div>
+    <br>
+    <div class="input-group col-md-12 mb-3">
+      <label for="sortBy" class="form-group mr-2">{{'SortBy' | translate}}</label>
+      <select class="form-control" name="sortBy" id="sortBy" [(ngModel)]=serviceTypeFilter.sortBy>
+        <option value="id">{{'id' | translate}}</option>
+        <option value="name">{{'name' | translate}}</option>
+        <option value="description">{{'description' | translate}}</option>
+        <option value="code">{{'code' | translate}}</option>
+      </select>
+      <label for="sortDirection" class="form-group ml-4 mr-2">{{'SortDirection' | translate}}</label>
+      <select class="form-control" name="sortDirection" id="sortDirection" [(ngModel)]=serviceTypeFilter.sortDirection>
+        <option value="asc">{{'asc' | translate}}</option>
+        <option value="desc">{{'desc' | translate}}</option>
+      </select>
+      <div>
+        <button (click)="onChangeSort(serviceTypeFilter)" class="btn btn-primary ml-2" id="btn-sort" type="button">{{'Sort' |
+          translate}}</button>
+      </div>
+    </div>
+    <br>
+    <div class="input-group form-inline col-md-12 mb-3" id="paging-div-1">
+      <div class="form-group col-md-9" id="paging-div-2">
+        <div class="form-group">
+          <label for="itmsPerPage" class="form-group mr-2">{{'ItemsPerPage' | translate}}</label>
+          <select class="form-control mr-4" id="itmsPerPage" name="itemsPerPage" [(ngModel)]=serviceTypeFilter.size
+            (ngModelChange)="onChange(serviceTypeFilter.size)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+        </div>
+        <ngb-pagination [collectionSize]="totalElements" [pageSize]="serviceTypeFilter.size" [(page)]="serviceTypeFilter.page"
+          [maxSize]="10" (pageChange)="onPageChange($event)"></ngb-pagination>
+      </div>
+      <div id="button-div">
+        <a class="btn btn-outline-primary" routerLink="/service-types/add">{{'AddNewServiceType' | translate}}</a>
+      </div>
+    </div>
+    <br>
+    <h3 *ngIf="totalElements == 0"><b>{{'NoServiceType' | translate}}</b></h3>
+    <table class="table table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th class="col-md-1" scope="col">{{'id' | translate}}</th>
+          <th class="col-md-2" scope="col">{{'name' | translate}}</th>
+          <th class="col-md-3" scope="col">{{'description' | translate}}</th>
+          <th class="col-md-1" scope="col">{{'code' | translate}}</th>
+          <th class="col-md-1" scope="col">{{'ValidInvalid' | translate}}</th>
+          <th class="col-md-1" scope="col">{{'Edit' | translate}}</th>
+          <th class="col-md-3" scope="col">{{'SetValidInvalid' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table table-hover" *ngFor="let serviceType of serviceTypes">
+          <td>{{ serviceType.id }}</td>
+          <th>{{ serviceType.name }}</th>
+          <th>{{ serviceType.description }}</th>
+          <th>{{ serviceType.code }}</th>
+          <td *ngIf="serviceType.isValid">{{'Valid' | translate}}</td>
+          <td *ngIf="!serviceType.isValid">{{'Invalid' | translate}}</td>
+          <td><a class="btn btn-outline-dark" routerLink="/service-types/update/{{ serviceType.id }}">{{'Edit' | translate}}</a></td>
+          <td *ngIf="serviceType.isValid"><button type="button" id="isValid" name="isValid" class="btn btn-outline-danger"
+              (click)="changeIsValid(serviceType.id, serviceTypeFilter)">{{'SetInvalid' | translate}}</button></td>
+          <td *ngIf="!serviceType.isValid"><button type="button" id="isNotValid" name="isNotValid"
+              class="btn btn-outline-success" (click)="changeIsValid(serviceType.id, serviceTypeFilter)">{{'SetValid' |
+              translate}}</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

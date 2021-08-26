@@ -1,0 +1,28 @@
+<div class="container"><h2>{{"car-types.title"|translate}}</h2>
+    <button type="button" class="btn btn-outline-success" id="addbtn" routerLink="/car-types/add">{{'add'|translate}}</button>
+    <div *ngIf="carType$ | async as carTypes">
+     <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col" >id</th>
+            <th scope="col">{{'name'|translate}}</th>
+            <th scope="col">{{'code'|translate}}</th>
+            <th scope="col">{{'update'|translate}}</th>
+            <th scope="col"> {{'ValidInvalid'|translate}} </th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr *ngFor="let carType of carTypes">
+              <th scope="row">{{carType.id}}</th>
+              <td>{{carType.name}}</td>
+              <td>{{carType.code}}</td>
+              <td><button class="btn btn-outline-dark" routerLink="update/{{carType.id}}" >{{'update'|translate}}</button>  
+              <td>
+                <button type="button" class="btn btn-outline-danger" *ngIf="carType.isValid" (click)="changeIsValid(carType)"> {{'Delete'|translate}} </button>
+                <button type="button" class="btn btn-outline-success" *ngIf="!carType.isValid" (click)="changeIsValid(carType)">{{'Restore'|translate}}</button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>

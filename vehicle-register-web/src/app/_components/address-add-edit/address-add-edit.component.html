@@ -1,0 +1,46 @@
+<div class="container">
+  <h3 id="list-title" *ngIf="currentAddress.id != undefined"><b>{{'UpdateAddress' | translate}}</b></h3>
+  <h3 id="list-title" *ngIf="currentAddress.id == undefined"><b>{{'AddAddress' | translate}}</b></h3>
+  <form #addEditForm="ngForm">
+    <div class="form-group col-md-12 mb-3">
+      <label for="address" class="form-label">{{'address' | translate}}</label>
+      <input required pattern="^[A-Z[\]^_` a-z0-9]{1,60}$" type="text" #address="ngModel"
+        [(ngModel)]="currentAddress.address" name="address" class="form-control"
+        [class.is-invalid]="address.invalid && address.touched" id="address">
+      <div *ngIf="address.errors?.required" class="invalid-feedback">
+        {{'RequiredName' | translate}}
+      </div>
+      <div *ngIf="address.errors?.pattern" class="invalid-feedback">
+        {{'AddressLessThan60Char' | translate}}
+      </div>
+    </div>
+    <div class="form-group col-md-12 mb-3">
+      <label for="cityName" class="form-label">{{'city' | translate}}</label><span
+        *ngIf="currentAddress.id != undefined">: <b>{{ currentAddress.city.name }}</b></span>
+      <select class="form-control" name="cityName" id="cityName" [(ngModel)]=currentAddress.city>
+        <option *ngFor="let city of citiesList" [ngValue]="city">{{ city.name }}</option>
+      </select>
+    </div>
+    <div *ngIf="apiError.code != ''" class="alert alert-danger">
+      {{apiError.description}}
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md" id="button-group-add-edit">
+      <div *ngIf="currentAddress.id != undefined">
+        <button (click)="onUpdateAddress()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4"
+          id="btn-update" type="submit">{{'update' | translate}}</button>
+      </div>
+      <div *ngIf="currentAddress.id == undefined">
+        <button (click)="onAddAddress()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4" id="btn-add"
+          type="submit">{{'add' | translate}}</button>
+      </div>
+      <div>
+        <button class="btn btn-secondary" id="btn-cancel" routerLink="/addresses" type="submit">{{'cancel' |
+          translate}}</button>
+      </div>
+      <div>
+        <button class="btn btn-secondary" id="btn-add-element" routerLink="/cities/add" type="submit">{{'AddNewCity' |
+          translate}}</button>
+      </div>
+    </div>
+  </form>
+</div>

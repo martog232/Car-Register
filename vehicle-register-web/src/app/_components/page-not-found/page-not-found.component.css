@@ -1,0 +1,13 @@
+div{
+    text-align: center;
+}
+.dropdown-item{
+    text-align: center;
+    text-decoration-color: cornflowerblue;
+}
+h1{
+    text-shadow: 2px 2px #6d6c6c;
+}
+button{
+    margin-top: 20px;
+}

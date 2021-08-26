@@ -1,0 +1,57 @@
+<div class="container">
+    <h3 id="list-title" *ngIf="currentDriver.id != undefined"><b>{{'UpdateDriver' | translate}}</b></h3>
+    <h3 id="list-title" *ngIf="currentDriver.id == undefined"><b>{{'AddDriver' | translate}}</b></h3>
+    <form #addEditForm="ngForm">
+        <div class="form-group col-md-12 mb-3">
+            <label for="name" class="form-label">{{'name' | translate}}</label>
+            <input required pattern="^[A-Za-z 0-9]{1,50}$" type="text" #name="ngModel" [(ngModel)]="currentDriver.name"
+                name="name" class="form-control" [class.is-invalid]="name.invalid && name.touched" id="name">
+            <div *ngIf="name.errors?.required" class="invalid-feedback">
+                {{'RequiredName' | translate}}
+            </div>
+            <div *ngIf="name.errors?.pattern" class="invalid-feedback">
+                {{'LessThan50Char' | translate}}
+            </div>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <label for="addressAddress" class="form-label">{{'address' | translate}}</label>
+            <span *ngIf="currentDriver.id != undefined">: <b>{{ currentDriver.address.address
+                    }}</b></span>
+            <select class="form-control" name="addressAddress" id="addressAddress" [(ngModel)]=currentDriver.address>
+                <option *ngFor="let address of addressesList" [ngValue]="address">{{ address.address }}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <label for="age" class="form-label">{{'age' | translate}}</label>
+            <input required pattern="^[0-9]{1,2}$" type="text" #age="ngModel" [(ngModel)]="currentDriver.age" name="age"
+                class="form-control" [class.is-invalid]="age.invalid && age.touched" id="age">
+            <div *ngIf="age.errors?.required" class="invalid-feedback">
+                {{'RequiredAge' | translate}}
+            </div>
+            <div *ngIf="age.errors?.pattern" class="invalid-feedback">
+                {{'LessThan99years' | translate}}
+            </div>
+        </div>
+        <div *ngIf="apiError.code != ''" class="alert alert-danger">
+            {{apiError.description}}
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md" id="button-group-add-edit">
+            <div *ngIf="currentDriver.id != undefined">
+                <button (click)="onUpdateDriver()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4"
+                    id="btn-update" type="submit">{{'update' | translate}}</button>
+            </div>
+            <div *ngIf="currentDriver.id == undefined">
+                <button (click)="onAddDriver()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4"
+                    id="btn-add" type="submit">{{'add' | translate}}</button>
+            </div>
+            <div>
+                <button class="btn btn-secondary" id="btn-cancel" routerLink="/drivers" type="submit">{{'cancel' |
+                    translate}}</button>
+            </div>
+            <div>
+                <button class="btn btn-secondary" id="btn-add-element" routerLink="/addresses/add"
+                    type="submit">{{'AddNewAddress' | translate}}</button>
+            </div>
+        </div>
+    </form>
+</div>

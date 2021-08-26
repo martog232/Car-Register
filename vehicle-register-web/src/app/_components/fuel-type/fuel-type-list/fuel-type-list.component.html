@@ -1,0 +1,29 @@
+<div class="container" ><h2>{{'fuel-types.title'|translate}}</h2>
+    <button type="button" class="btn btn-outline-success" id="addbtn" routerLink="/fuel-types/add">{{'add' | translate}}</button>
+    <div *ngIf="fuelType$ | async as fuelTypes">
+     <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col" >Id</th>
+            <th scope="col">{{'name' | translate}}</th>
+            <th scope="col">{{'code' | translate}}</th>
+            <th scope="col">{{'update'| translate}}</th>
+            <th scope="col">{{'Is it Valid' | translate}}</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr *ngFor="let fuelType of fuelTypes">
+              <th scope="row">{{fuelType.id}}</th>
+              <td>{{fuelType.name}}</td>
+              <td>{{fuelType.code}}</td>
+              <td><button class="btn btn-outline-dark" routerLink="update/{{fuelType.id}}" >{{'update' | translate}}</button>  
+              <td>
+                <button type="button" class="btn btn-outline-danger" *ngIf="fuelType.isValid" (click)="changeIsValid(fuelType)"> {{'Set to Invalid' | translate}} </button>
+                <button type="button" class="btn btn-outline-success" *ngIf="!fuelType.isValid" (click)="changeIsValid(fuelType)">{{'Set to Valid' | translate}}</button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+

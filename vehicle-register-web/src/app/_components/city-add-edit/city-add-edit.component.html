@@ -1,0 +1,45 @@
+<div class="container">
+  <h3 id="list-title" *ngIf="currentCity.id != undefined"><b>{{'UpdateCity' | translate}}</b></h3>
+  <h3 id="list-title" *ngIf="currentCity.id == undefined"><b>{{'AddCity' | translate}}</b></h3>
+  <form #addEditForm="ngForm">
+    <div class="form-group col-md-12 mb-3">
+      <label for="name" class="form-label">{{'name' | translate}}</label>
+      <input required pattern="^[A-Za-z 0-9]{1,30}$" type="text" #name="ngModel" [(ngModel)]="currentCity.name"
+        name="name" class="form-control" [class.is-invalid]="name.invalid && name.touched" id="name">
+      <div *ngIf="name.errors?.required" class="invalid-feedback">
+        {{'RequiredName' | translate}}
+      </div>
+      <div *ngIf="name.errors?.pattern" class="invalid-feedback">
+        {{'LessThan30Char' | translate}}
+      </div>
+    </div>
+    <div class="form-group col-md-12 mb-3">
+      <label for="countryName" class="form-label">{{'country' | translate}}</label><span
+        *ngIf="currentCity.id != undefined">: <b>{{ currentCity.country.name }}</b></span>
+      <select class="form-control" name="countryName" id="countryName" [(ngModel)]=currentCity.country>
+        <option *ngFor="let country of countriesList" [ngValue]="country">{{ country.name }}</option>
+      </select>
+    </div>
+    <div *ngIf="apiError.code != ''" class="alert alert-danger">
+      {{apiError.description}}
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md" id="button-group-add-edit">
+      <div *ngIf="currentCity.id != undefined">
+        <button (click)="onUpdateCity()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4" id="btn-update"
+          type="submit">{{'update' | translate}}</button>
+      </div>
+      <div *ngIf="currentCity.id == undefined">
+        <button (click)="onAddCity()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4" id="btn-add"
+          type="submit">{{'add' | translate}}</button>
+      </div>
+      <div>
+        <button class="btn btn-secondary" id="btn-cancel" routerLink="/cities" type="submit">{{'cancel' |
+          translate}}</button>
+      </div>
+      <div>
+        <button class="btn btn-secondary" id="btn-add-element" routerLink="/countries/add"
+          type="submit">{{'AddNewCountry' | translate}}</button>
+      </div>
+    </div>
+  </form>
+</div>

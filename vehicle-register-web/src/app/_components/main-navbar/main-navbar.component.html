@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="home">Vehicle Register</a>
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="container">
+            <ul class="navbar-nav">
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown">
+                        {{'Vehicles'|translate}}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="vehicles">{{'List' | translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="vehicles/add">{{'add'|translate}}</a></li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown">
+                        {{'Service Stations' | translate}}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="service-stations">{{'List' | translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="service-stations/add">{{'add'|translate}}</a></li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown">
+                        {{'Service Stations Services' | translate}}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="service-stations-services">{{'List' | translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="service-stations-services/add">{{'add'|translate}}</a></li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown">
+                        {{'Inspections' | translate}}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="inspections">{{'List' | translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="inspections/add">{{'add'|translate}}</a></li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown">
+                        {{'Drivers'|translate}}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="drivers">{{'List' | translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="drivers/add">{{'add'|translate}}</a></li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown">
+                        {{'addresses' | translate}}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="addresses">{{'List' | translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="addresses/add">{{'add'|translate}}</a></li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown">
+                        {{'Nomenclatures' | translate}}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" routerLink="car-types">{{'Car types' | translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="fuel-types">{{'fuel-types'| translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="service-types">{{'Service types'|translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="brands">{{'Brands'|translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="countries">{{'Countries'|translate}}</a></li>
+                        <li><a class="dropdown-item" routerLink="cities">{{'Cities'|translate}}</a></li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown" routerLinkActive="active">
+                    <select #langSelect (change)="translate.use(langSelect.value)">
+                      <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}<img src="../../../assets/.png"></option>
+                    </select>
+                  </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</nav>

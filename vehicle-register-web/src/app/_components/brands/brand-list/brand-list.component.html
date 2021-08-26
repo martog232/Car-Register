@@ -1,0 +1,82 @@
+<div class="container">
+    <h2>{{'Brands' | translate}}</h2>
+
+  <div class="input-group col-md-12 mb-3">
+    <input placeholder="{{'name' | translate}}" [(ngModel)]="brandFilter.name" id="searchByName" name="searchByName"
+      class="form-control mr-2">
+    <input placeholder="{{'country' | translate}}" [(ngModel)]="brandFilter.countryName" id="searchByCode"
+      name="searchByCode" class="form-control ml-2 mr-2">
+    <label for="deleted" class="form-group ml-4 mr-2 mb-1">Valid/inValid</label>
+    <select class="form-control" name="deleted" id="deleted" [(ngModel)]=brandFilter.isValid>
+      <option value="">{{'all' | translate}}</option>
+      <option value="true">{{'valid' | translate}}</option>
+      <option value="false">{{'invalid' | translate}}</option>
+    </select>
+    <span>
+      <button id="btn-search" (click)="onSearch(brandFilter)" class="btn btn-primary ml-2" type="button">{{'Search' |
+        translate}}</button>
+    </span>
+  </div>
+  <br>
+  <div class="input-group col-md-12 mb-3">
+    <label for="sortBy" class="form-group mr-2">{{'SortBy' | translate}}</label>
+    <select class="form-control" name="sortBy" id="sortBy" [(ngModel)]=brandFilter.sortBy>
+      <option value="id">{{'id' | translate}}</option>
+      <option value="name">{{'name' | translate}}</option>
+      <option value="country">{{'country' | translate}}</option>
+    </select>
+    <label for="sortDirection" class="form-group ml-4 mr-2">{{'SortDirection' | translate}}</label>
+    <select class="form-control" name="sortDirection" id="sortDirection" [(ngModel)]=brandFilter.sortDirection>
+      <option value="asc">{{'asc' | translate}}</option>
+      <option value="desc">{{'desc' | translate}}</option>
+    </select>
+    <div>
+      <button (click)="onChangeSort(brandFilter)" class="btn btn-primary ml-2" id="btn-sort" type="button">{{'Sort' |
+        translate}}</button>
+    </div>
+  </div>
+  <br>
+  <div class="input-group form-inline col-md-12 mb-3" id="paging-div-1">
+    <div class="form-group col-md-10" id="paging-div-2">
+      <div class="form-group">
+        <label for="itmsPerPage" class="form-group mr-2">{{'ItemsPerPage' | translate}}</label>
+        <select class="form-control mr-4" id="itmsPerPage" name="itemsPerPage" [(ngModel)]=brandFilter.size
+          (ngModelChange)="onChange(brandFilter.size)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+      </div>
+      <ngb-pagination [collectionSize]="totalElements" [pageSize]="brandFilter.size" [(page)]="brandFilter.page"
+        [maxSize]="10" (pageChange)="onPageChange($event)"></ngb-pagination>
+    </div>
+    <div id="button-div">
+      <a class="btn btn-outline-success" routerLink="/brands/add">{{'ADD' | translate}}</a>
+    </div>
+  </div>
+        <table class="table table-hover" *ngIf="brands$ | async as brandsList">
+            <thead>
+                <tr>
+                    <th class="col-md-1" scope="col">{{'id' | translate}}</th>
+                    <th class="col-md-1" scope="col">{{'name' | translate}}</th>
+                    <th class="col-md-1" scope="col">{{'Country' | translate}}</th>
+                    <th class="col-md-1" scope="col">{{'update' | translate}}</th>
+                    <th class="col-md-1" scope="col">{{'Is it Valid' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let brand of brandsList.content">
+                    <th scope="row">{{brand.id}}</th>
+                    <td>{{brand.name}}</td>
+                    <td>{{brand.country.name}}</td>
+                    <td><button class="btn btn-outline-dark" routerLink="update/{{brand.id}}">Update</button>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger" *ngIf="brand.isValid"
+                            (click)="changeIsValid(brand)">Delete</button>
+                        <button type="button" class="btn btn-outline-success" *ngIf="!brand.isValid"
+                            (click)="changeIsValid(brand)">Restore</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>

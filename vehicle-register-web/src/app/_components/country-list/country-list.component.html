@@ -1,0 +1,82 @@
+<div class="container">
+  <h2 id="list-title"><b>Countries</b></h2>
+    <div class="input-group col-md-12 mb-3">
+      <input placeholder="Name" [(ngModel)]="countryFilter.name" id="searchByName" name="searchByName"
+        class="form-control mr-2">
+      <input placeholder="Code" [(ngModel)]="countryFilter.code" id="searchByCode" name="searchByCode"
+        class="form-control ml-2 mr-2">
+      <label for="deleted" class="form-group ml-4 mr-2 mb-1">Valid/Invalid:</label>
+      <select class="form-control" name="deleted" id="deleted" [(ngModel)]=countryFilter.isValid>
+        <option value="">all</option>
+        <option value="true">valid</option>
+        <option value="false">invalid</option>
+      </select>
+      <span>
+        <button id="btn-search" (click)="onSearch(countryFilter)" class="btn btn-primary ml-2" type="button">Search</button>
+      </span>
+    </div>
+    <br>
+    <div class="input-group col-md-12 mb-3">
+      <label for="sortBy" class="form-group mr-2">Sort by:</label>
+      <select class="form-control" name="sortBy" id="sortBy" [(ngModel)]=countryFilter.sortBy>
+        <option value="id">id</option>
+        <option value="name">name</option>
+        <option value="code">code</option>
+      </select>
+      <label for="sortDirection" class="form-group ml-4 mr-2">Sort Direction:</label>
+      <select class="form-control" name="sortDirection" id="sortDirection" [(ngModel)]=countryFilter.sortDirection>
+        <option value="asc">asc</option>
+        <option value="desc">desc</option>
+      </select>
+      <div>
+        <button (click)="onChangeSort(countryFilter)" class="btn btn-primary ml-2" id="btn-sort" type="button">Sort</button>
+      </div>
+    </div>
+    <br>
+    <div class="input-group form-inline col-md-12 mb-3" id="paging-div-1">
+      <div class="form-group col-md-10" id="paging-div-2">
+        <div class="form-group">
+          <label for="itmsPerPage" class="form-group mr-2">Items per page</label>
+          <select class="form-control mr-4" id="itmsPerPage" name="itemsPerPage" [(ngModel)]=countryFilter.size
+            (ngModelChange)="onChange(countryFilter.size)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+        </div>
+        <ngb-pagination [collectionSize]="totalElements" [pageSize]="countryFilter.size" [(page)]="countryFilter.page"
+          [maxSize]="10" (pageChange)="onPageChange($event)"></ngb-pagination>
+      </div>
+      <div id="button-div">
+        <a class="btn btn-outline-primary" routerLink="/countries/add">Add New Country</a>
+      </div>
+    </div>
+    <br>
+    <h3 *ngIf="totalElements == 0"><b>There are no countries meeting the selected criteria.</b></h3>
+    <table class="table table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th class="col-md-1" scope="col">Id</th>
+          <th class="col-md-3" scope="col">Country</th>
+          <th class="col-md-1" scope="col">Code</th>
+          <th class="col-md-2" scope="col">Valid/Invalid</th>
+          <th class="col-md-2" scope="col">Edit</th>
+          <th class="col-md-3" scope="col">Set valid/ Set invalid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table table-hover" *ngFor="let country of countries">
+          <td>{{ country.id }}</td>
+          <th>{{ country.name }}</th>
+          <td>{{ country.code }}</td>
+          <td *ngIf="country.isValid">valid</td>
+          <td *ngIf="!country.isValid">invalid</td>
+          <td><a class="btn btn-outline-dark" routerLink="/countries/update/{{ country.id }}">Edit</a></td>
+          <td *ngIf="country.isValid"><button type="button" id="isValid" name="isValid" class="btn btn-outline-danger"
+              (click)="changeIsValid(country.id, countryFilter)">Set invalid</button></td>
+          <td *ngIf="!country.isValid"><button type="button" id="isNotValid" name="isNotValid"
+              class="btn btn-outline-success" (click)="changeIsValid(country.id, countryFilter)">Set valid</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

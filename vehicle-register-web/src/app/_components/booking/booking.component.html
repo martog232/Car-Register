@@ -1,0 +1,30 @@
+<div class="container">
+<h1>BOOKING</h1>
+<div class="col-md-12 mb-3">
+    <label for="name" class="form-label">Choose vehicle</label>
+    <input placeholder="vehicle" [(ngModel)]="serviceStationServiceFilter.fuelType"  id="searchByName" name="searchByName" class="form-control mr-2">
+    <input class="form-control mr-2"  placeholder="ServiceType" [(ngModel)]="serviceStationServiceFilter.serviceType" name="serviceTypesCount">
+    <button id="ok"  class="btn btn-primary ml-2" (click)="onSearch(serviceStationServiceFilter)" type="button">ok</button>
+
+  </div>
+  <table class="table table-hover">
+    <thead class="table-secondary">
+      <tr>
+        <th class="col-md-1" scope="col">{{'id' | translate}}</th>
+        <th class="col-md-2" scope="col">{{'service station' | translate}}</th>
+        <th>{{'service type'}}</th>
+        <th class="col-md-2" scope="col">{{'price' | translate}}</th>
+        <th class="col-md-2" scope="col">Work time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table table-hover" *ngFor="let serviceStationService of serviceStationService">
+        <td>{{ serviceStationService.id }}</td>
+        <th>{{ serviceStationService.serviceStation.name }}</th>
+        <th>{{serviceStationService.serviceType.name}}</th>
+        <td>{{serviceStationService.price}}</td>
+        <td>{{serviceStationService.serviceStation.startWorkTime}}/{{serviceStationService.serviceStation.offWorkTime}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

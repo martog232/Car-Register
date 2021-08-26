@@ -1,0 +1,19 @@
+img{
+    max-height: 260px;
+}
+.card{
+    margin-left: 35px;
+    margin-right: 35px;
+}
+.card {
+    display: inline-block;
+    border-color:#007bff;
+    box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.25);
+}
+h6{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:13px;
+}
+  

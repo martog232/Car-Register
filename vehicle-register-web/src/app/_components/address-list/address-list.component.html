@@ -1,0 +1,89 @@
+<div class="container">
+    <h2 id="list-title"><b>{{'Addresses' | translate}}</b></h2>
+    <div class="input-group col-md-12 mb-3">
+        <input placeholder="{{'address' | translate}}" [(ngModel)]="addressFilter.address" id="searchByName"
+            name="searchByName" class="form-control mr-2">
+        <input placeholder="{{'city' | translate}}" [(ngModel)]="addressFilter.cityName" id="searchByCode"
+            name="searchByCode" class="form-control ml-2 mr-2">
+        <label for="deleted" class="form-group ml-4 mr-2 mb-1">{{'ValidInvalid' | translate}}</label>
+        <select class="form-control" name="deleted" id="deleted" [(ngModel)]=addressFilter.isValid>
+            <option value="">{{'all' | translate}}</option>
+            <option value="true">{{'valid' | translate}}</option>
+            <option value="false">{{'invalid' | translate}}</option>
+        </select>
+        <span>
+            <button id="btn-search" (click)="onSearch(addressFilter)" class="btn btn-primary ml-2"
+                type="button">{{'Search' | translate}}</button>
+        </span>
+    </div>
+    <br>
+    <div class="input-group col-md-12 mb-3">
+        <label for="sortBy" class="form-group mr-2">{{'SortBy' | translate}}</label>
+        <select class="form-control" name="sortBy" id="sortBy" [(ngModel)]=addressFilter.sortBy>
+            <option value="id">{{'id' | translate}}</option>
+            <option value="address">{{'address' | translate}}</option>
+            <option value="city">{{'city' | translate}}</option>
+        </select>
+        <label for="sortDirection" class="form-group ml-4 mr-2">{{'SortDirection' | translate}}</label>
+        <select class="form-control" name="sortDirection" id="sortDirection" [(ngModel)]=addressFilter.sortDirection>
+            <option value="asc">{{'asc' | translate}}</option>
+            <option value="desc">{{'desc' | translate}}</option>
+        </select>
+        <div>
+            <button (click)="onChangeSort(addressFilter)" class="btn btn-primary ml-2" id="btn-sort"
+                type="button">{{'Sort' | translate}}</button>
+        </div>
+    </div>
+    <br>
+    <div class="input-group form-inline col-md-12 mb-3" id="paging-div-1">
+        <div class="form-group col-md-10" id="paging-div-2">
+            <div class="form-group">
+                <label for="itmsPerPage" class="form-group mr-2">{{'ItemsPerPage' | translate}}</label>
+                <select class="form-control mr-4" id="itmsPerPage" name="itemsPerPage" [(ngModel)]=addressFilter.size
+                    (ngModelChange)="onChange(addressFilter.size)">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+            <ngb-pagination [collectionSize]="totalElements" [pageSize]="addressFilter.size"
+                [(page)]="addressFilter.page" [maxSize]="10" (pageChange)="onPageChange($event)"></ngb-pagination>
+        </div>
+        <div id="button-div">
+            <a class="btn btn-outline-primary" routerLink="/addresses/add">{{'AddNewAddress' | translate}}</a>
+        </div>
+    </div>
+    <br>
+    <h3 *ngIf="totalElements == 0"><b>{{'NoAddresses' | translate}}</b></h3>
+    <table class="table table-hover">
+        <thead class="table-secondary">
+            <tr>
+                <th class="col-md-1" scope="col">{{'id' | translate}}</th>
+                <th class="col-md-3" scope="col">{{'address' | translate}}</th>
+                <th class="col-md-2" scope="col">{{'city' | translate}}</th>
+                <th class="col-md-1" scope="col">{{'ValidInvalid' | translate}}</th>
+                <th class="col-md-2" scope="col">{{'Edit' | translate}}</th>
+                <th class="col-md-3" scope="col">{{'SetValidInvalid' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table table-hover" *ngFor="let address of addresses">
+                <td>{{ address.id }}</td>
+                <th>{{ address.address }}</th>
+                <td>{{ address.city.name }}</td>
+                <td *ngIf="address.isValid">{{'Valid' | translate}}</td>
+                <td *ngIf="!address.isValid">{{'Invalid' | translate}}</td>
+                <td><a class="btn btn-outline-dark" routerLink="/addresses/update/{{ address.id }}">{{'Edit' |
+                        translate}}</a></td>
+                <td *ngIf="address.isValid"><button type="button" id="isValid" name="isValid"
+                        class="btn btn-outline-danger" (click)="changeIsValid(address.id, addressFilter)">{{'SetInvalid'
+                        | translate}}</button>
+                </td>
+                <td *ngIf="!address.isValid"><button type="button" id="isNotValid" name="isNotValid"
+                        class="btn btn-outline-success" (click)="changeIsValid(address.id, addressFilter)">{{'SetValid'
+                        | translate}}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

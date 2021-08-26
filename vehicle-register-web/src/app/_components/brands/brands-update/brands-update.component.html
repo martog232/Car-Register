@@ -1,0 +1,28 @@
+<form class="container"> 
+    <div *ngIf="router.url === '/brands/add'"> 
+      <h2>{{'add-brand.title'|translate}}</h2>
+      <div class="form-group" >
+        <label for="formGroupExampleInput">{{'name' | translate}} :  {{emptyBrand.name}}</label>
+        <input type="text" [(ngModel)]="emptyBrand.name" name="name" class="form-control" id="name" required maxlength="30">
+      </div>
+      <div class="form-group" >
+        <label for="formGroupExampleInput2">{{'Country' | translate}} :  {{emptyBrand.country.id}}</label>
+        <input type="text" [(ngModel)]="emptyBrand.country.id" name="name" class="form-control" id="name" required maxlength="3">
+      </div>
+      <button type="button" class="btn btn-outline-primary" (click)="onAddBrand()" >{{'add' | translate}}</button>
+      <button class="btn btn-outline-danger" routerLink="/brands" >{{ 'cancel' | translate }}</button>
+  </div>
+  <div *ngIf="!(router.url === '/brands/add')"> 
+    <h2>{{'update-brands.title'|translate}}</h2>
+    <div class="form-group" >
+      <label for="formGroupExampleInput">{{'name' | translate}} :</label>
+      <input type="text" [(ngModel)]="emptyBrand.name" name="name" class="form-control" id="name" required maxlength="10">
+    </div>
+    <div class="form-group" >
+      <label for="formGroupExampleInput2">{{'country' | translate}}</label>
+      <input type="text" [(ngModel)]="emptyBrand.country.id" name="country" class="form-control" id="country" required maxlength="3">
+    </div>
+    <button type="button" class="btn btn-outline-primary" (click)="onUpdateBrand()">{{'update' | translate}}</button>
+    <button class="btn btn-outline-danger" routerLink="/brands" >{{'Cancel'|translate}}</button>
+  </div>
+   </form>

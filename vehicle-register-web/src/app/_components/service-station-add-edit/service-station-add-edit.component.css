@@ -1,0 +1,19 @@
+#btn-update,
+#btn-add,
+#btn-cancel {
+  width: 100px;
+}
+
+#btn-add-element {
+  width: 170px;
+  margin-left: 685px;
+}
+
+#button-group-add-edit {
+  padding-left: 15px;
+}
+
+#list-title {
+  text-align: center;
+  padding-bottom: 20px;
+}

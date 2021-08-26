@@ -1,0 +1,59 @@
+<div class="container">
+    <h3 id="list-title" *ngIf="currentServiceType.id != undefined"><b>{{'UpdateServiceType' | translate}}</b></h3>
+    <h3 id="list-title" *ngIf="currentServiceType.id == undefined"><b>{{'AddServiceType' | translate}}</b></h3>
+    <form #addEditForm="ngForm">
+        <div class="form-group col-md-12 mb-3">
+            <label for="name" class="form-label">{{'name' | translate}}</label>
+            <input required pattern="^[A-Za-z 0-9]{1,50}$" type="text" #name="ngModel"
+                [(ngModel)]="currentServiceType.name" name="name" class="form-control"
+                [class.is-invalid]="name.invalid && name.touched" id="name">
+            <div *ngIf="name.errors?.required" class="invalid-feedback">
+                {{'RequiredName' | translate}}
+            </div>
+            <div *ngIf="name.errors?.pattern" class="invalid-feedback">
+                {{'LessThan50Char' | translate}}
+            </div>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <label for="description" class="form-label">{{'description' | translate}}</label>
+            <input required pattern="^[A-Za-z 0-9]{1,100}$" type="text" #description="ngModel"
+                [(ngModel)]="currentServiceType.description" name="description" class="form-control"
+                [class.is-invalid]="description.invalid && description.touched" id="description">
+            <div *ngIf="description.errors?.required" class="invalid-feedback">
+                {{'RequiredDescription' | translate}}
+            </div>
+            <div *ngIf="description.errors?.pattern" class="invalid-feedback">
+                {{'LessThan100Char' | translate}}
+            </div>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <label for="code" class="form-label">{{'code' | translate}}</label>
+            <input required pattern="^[A-Za-z -/0-9]{1,5}$" type="text" #code="ngModel"
+                [(ngModel)]="currentServiceType.code" name="code" class="form-control"
+                [class.is-invalid]="code.invalid && code.touched" id="code">
+            <div *ngIf="code.errors?.required" class="invalid-feedback">
+                {{'RequiredCode' | translate}}
+            </div>
+            <div *ngIf="code.errors?.pattern" class="invalid-feedback">
+                {{'LessThan5Char' | translate}}
+            </div>
+            <div *ngIf="apiError.code != ''" class="alert alert-danger">
+                {{apiError.description}}
+            </div>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md" id="button-group-add-edit">
+            <div *ngIf="currentServiceType.id != undefined">
+                <button (click)="onUpdateServiceType()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4"
+                    id="btn-update" type="submit">{{'update' | translate}}</button>
+            </div>
+            <div *ngIf="currentServiceType.id == undefined">
+                <button (click)="onAddServiceType()" [disabled]="addEditForm.invalid" class="btn btn-primary mr-4"
+                    id="btn-add" type="submit">{{'add' | translate}}</button>
+            </div>
+            <div>
+                <button class="btn btn-secondary" id="btn-cancel" routerLink="/service-types" type="submit">{{'cancel' |
+                    translate}}</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,7 @@
+#btn-update, #btn-add, #btn-cancel{
+    width: 100px;
+}
+
+#button-group-add-edit {
+    padding-left: 15px;
+}

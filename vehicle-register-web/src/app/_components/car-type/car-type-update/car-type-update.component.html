@@ -1,0 +1,28 @@
+<form class="container"> 
+    <h2>Car Type</h2> 
+    <div *ngIf="router.url === '/car-types/add'"> 
+      <div class="form-group" >
+        <label for="formGroupExampleInput">Name: {{emptyCarType.name}}</label>
+        <input type="text" [(ngModel)]="emptyCarType.name" name="name" class="form-control" id="name" required maxlength="10">
+      </div>
+      <div class="form-group" >
+        <label for="formGroupExampleInput2">Code: {{emptyCarType.code}}</label>
+        <input type="text" [(ngModel)]="emptyCarType.code" name="name" class="form-control" id="name" required maxlength="2">
+      </div>
+      <button type="button" class="btn btn-outline-primary" (click)="onAddCarType()" >{{'add'|translate}}</button>
+      <button class="btn btn-outline-danger" routerLink="/car-types" >{{'cancel' | translate}}</button>
+  </div>
+  <div *ngIf="!(router.url === '/car-types/add')"> 
+    <div class="form-group" >
+      <label for="formGroupExampleInput">Name: {{emptyCarType.name}}</label>
+      <input type="text" [(ngModel)]="emptyCarType.name" name="name" class="form-control" id="name" required maxlength="10">
+    </div>
+    <div class="form-group" >
+      <label for="formGroupExampleInput2">{{'code'}}</label>
+      <input type="text" [(ngModel)]="emptyCarType.code" name="code" class="form-control" id="code" required maxlength="2">
+    </div>
+    <button type="button" class="btn btn-outline-primary" (click)="onUpdateCarType()">{{'update'|translate}}</button>
+    <button class="btn btn-outline-danger" routerLink="/car-types" >{{'cancel'|translate}}</button>
+  </div>
+   </form>
+  
