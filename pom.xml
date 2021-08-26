@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>bg.infosys.interns</groupId>
+	<artifactId>vehicle-register</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>vehicle-register</name>
+	<description>Vehicle Register Wrapper Project</description>
+	<modules>
+		<module>vehile-register-core</module>
+		<module>vehicle-register-ws</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>infosys-m2</id>
+			<name>Infosys Maven2 Repository</name>
+			<url>http://devops.infosys.bg/artifactory/maven2</url>
+		</repository>
+	</repositories>
+
+	<properties>
+		<!-- Java and Maven plug-ins Versions -->
+		<v.java>11</v.java>
+		<v.compiler.plugin>3.8.1</v.compiler.plugin>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+
+		<!-- Default encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+</project>
