@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>bg.infosys.interns</groupId>
+		<artifactId>vehicle-register</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>vehicle-register-ws</groupId>
+	<artifactId>vehicle-register-ws</artifactId>
+	<packaging>war</packaging>
+	<name>vehicle-register-ws</name>
+	<description>Vehicle Register Web-Service Project</description>
+
+	<properties>
+		<!-- Infosys Common WS -->
+		<v.infosys.common.ws>1.7</v.infosys.common.ws>
+
+		<!-- Javax Servlet Api Version -->
+		<v.javax.servlet>3.0.1</v.javax.servlet>
+
+		<!-- Swagger Version -->
+		<v.springfox.swaagger>2.9.2</v.springfox.swaagger> 
+		
+		<!-- Hibernate Validator Version -->
+		<v.hibernate.validator>6.1.5.Final</v.hibernate.validator>
+		
+		<!-- Javax Validation Version -->
+		<v.javax.validation>2.0.1.Final</v.javax.validation>
+		
+		<!-- JUnit Version -->
+		<v.junit>4.13.2</v.junit>
+
+		<!-- Mockito version -->
+		<v.mockito>3.9.0</v.mockito>
+		
+		<!-- Spring-context version -->
+		<v.spring.context>5.3.8</v.spring.context>
+		
+		<!-- Spring-context-support version -->
+		<v.spring.context.support>5.3.8</v.spring.context.support>
+	</properties>
+
+	<dependencies>
+		<!-- DB Project Dependency -->
+		<dependency>
+			<groupId>bg.infosys.interns</groupId>
+			<artifactId>vehicle-register-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Infosys Common WS Dependency -->
+		<dependency>
+			<groupId>bg.infosys.common</groupId>
+			<artifactId>infosys-common-ws</artifactId>
+			<version>${v.infosys.common.ws}</version>
+		</dependency>
+
+		<!-- Javax Servlet Api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${v.javax.servlet}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Swagger -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>${v.springfox.swaagger}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>${v.springfox.swaagger}</version>
+		</dependency>
+		
+		<dependency>
+		   <groupId>io.springfox</groupId>
+		   <artifactId>springfox-bean-validators</artifactId>
+		   <version>${v.springfox.swaagger}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.swagger</groupId>
+		    <artifactId>swagger-annotations</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		
+		<!-- Java Validation -->
+		<dependency>             
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${v.javax.validation}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${v.hibernate.validator}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator-annotation-processor</artifactId>
+			<version>${v.hibernate.validator}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${v.junit}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core/3.9.0 -->
+		<dependency>
+    		<groupId>org.mockito</groupId>
+    		<artifactId>mockito-core</artifactId>
+    		<version>${v.mockito}</version>
+    		<scope>test</scope>
+		</dependency>
+	
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-context</artifactId>
+    		<version>${v.spring.context}</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-context-support</artifactId>
+    		<version>${v.spring.context.support}</version>
+		</dependency>
+	</dependencies>
+</project>
