@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>bg.infosys.interns</groupId>
+		<artifactId>vehicle-register</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>vehicle-register-core</artifactId>
+	<name>vehicle-register-core</name>
+	<description>Vehicle Register Core Project</description>
+
+	<properties>
+		<!-- Infosys Common Version -->
+		<v.infosys.common>2.13</v.infosys.common>
+
+		<!-- JUnit Version -->
+		<v.junit>4.13.2</v.junit>
+	</properties>
+
+	<dependencies>
+		<!-- Infosys Common Dependency -->
+		<dependency>
+			<groupId>bg.infosys.common</groupId>
+			<artifactId>infosys-common</artifactId>
+			<version>${v.infosys.common}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${v.junit}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
